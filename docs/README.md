@@ -34,3 +34,82 @@ Tests are written in Mocha/Chai.
 ## Making A Move: sample communication flow
 
 ![](images/chess-make-a-move.png)
+ 
+## Running the project
+
+These are basic instructions to get Jaquematic 3000 running locally for development.
+
+- **Prerequisites**:
+	- Node.js (v14 or later recommended) and npm installed. Verify with `node -v` and `npm -v`.
+	- MongoDB running locally (or a connection string to a MongoDB Atlas instance).
+
+- **Quick setup (development)**:
+
+	1. Clone the repository and change into the project directory:
+
+		 ```powershell
+		 git clone https://github.com/Tushar81940/Chess.git
+		 cd Chess
+		 ```
+
+	2. Install dependencies for the server and client (if the project is split into `server/` and `client/` folders). From the repository root run:
+
+		 ```powershell
+		 npm install
+		 # if there are separate packages, also run in subfolders, for example:
+		 # cd client; npm install; cd ../server; npm install
+		 ```
+
+	3. Configure environment variables. Create a `.env` file in the server directory (or at repo root if applicable) with at least:
+
+		 ```text
+		 MONGODB_URI=mongodb://localhost:27017/jaquematic
+		 PORT=3000
+		 JWT_SECRET=your_secret_here
+		 ```
+
+	4. Start MongoDB (skip if using Atlas). For Windows with a service installed:
+
+		 ```powershell
+		 net start MongoDB
+		 # or use your MongoDB launcher if you installed via MongoDB Compass or another method
+		 ```
+
+	5. Start the application in development mode. From the appropriate directory run:
+
+		 ```powershell
+		 npm run dev
+		 # or, if client and server are separate:
+		 # cd server; npm run dev
+		 # cd client; npm start
+		 ```
+
+- **Build and production**:
+
+	- To build the client for production (if a `client` folder exists):
+
+		```powershell
+		cd client
+		npm run build
+		```
+
+	- Start the production server (configure `NODE_ENV=production` and ensure the server serves built static assets):
+
+		```powershell
+		npm start
+		```
+
+- **Running tests**:
+
+	```powershell
+	npm test
+	# or cd server; npm test (adjust according to repo layout)
+	```
+
+- **Troubleshooting**:
+	- If you see connection errors, verify `MONGODB_URI` and that MongoDB is reachable.
+	- If ports are in use, change `PORT` in your `.env` or stop the process using the port.
+	- Check console logs in both client and server for error stack traces.
+
+If you'd like, I can tailor these steps precisely to the repository layout (client/server folders, npm scripts names). Tell me whether the project has a `client/` folder, a top-level `package.json`, or any custom start scripts and I'll adapt the README accordingly.
+
